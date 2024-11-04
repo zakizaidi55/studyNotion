@@ -57,6 +57,6 @@ app.get("/", (req, res) => {
 
 
 // activate the server
-app.listen(PORT, () => {
-    console.log(`APP is runnig at port ${PORT}`)
-}) 
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+  });
