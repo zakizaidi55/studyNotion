@@ -22,9 +22,18 @@ database.conncet();
 // middleware
 app.use(express.json());
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://study-notion-frontend-sepia-six.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+
 app.use(
 	cors({
-		origin:["http://localhost:3000", "https://study-notion-frontend-sepia-six.vercel.app/", "*"],
+		origin:["http://localhost:3000", "https://study-notion-frontend-sepia-six.vercel.app/"],
 		credentials:true,
 	})
 )
