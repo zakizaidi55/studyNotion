@@ -5,40 +5,39 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import IconBtn from '../../common/IconBtn';
 import { BsChevronDown } from 'react-icons/bs';
 
-function VideoDetailsSidebar({setReviewModal}) {
-    const [activeStatus, setActiveStatus] = useState("");
-    const [videoBarActive, setVideoBarActive] = useState("");
 
-    const navigate = useNavigate();
-    const{sectionId, subSectionId} = useParams();
-    const location = useLocation();
+export default function VideoDetailsSidebar({ setReviewModal }) {
+  const [activeStatus, setActiveStatus] = useState("")
+  const [videoBarActive, setVideoBarActive] = useState("")
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { sectionId, subSectionId } = useParams()
+  const {
+    courseSectionData,
+    courseEntireData,
+    totalNoOfLectures,
+    completedLectures,
+  } = useSelector((state) => state.viewCourse)
 
-    const {
-        courseSectionData,
-        courseEntireData,
-        totalNoOfLectures,
-        completedLectures,
-    } = useSelector((state) => state.viewCourse);
-
-
-    useEffect(() => {
-        const setActiveFlags = async() => {
-            if(!courseSectionData.length) {
-                return;
-            }
-            
-            const currentSectionIndex = courseSectionData.findIndex( (data) => data._id === sectionId)
-            const currentSubSectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.findIndex((data) => data._id === subSectionId);
-            const activeSebSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id;
-            //set currrent section here
-            setActiveStatus(courseSectionData?.[currentSectionIndex]?._id);
-            //set current subsection here
-            setVideoBarActive(activeSebSectionId);
-        }
-
-        setActiveFlags();
-        
-    },[location.pathname, courseSectionData, courseEntireData]);
+  useEffect(() => {
+    ;(() => {
+      if (!courseSectionData.length) 
+        return
+      const currentSectionIndx = courseSectionData.findIndex(
+        (data) => data._id === sectionId
+      )
+      const currentSubSectionIndx = courseSectionData?.[
+        currentSectionIndx
+      ]?.subSection.findIndex((data) => data._id === subSectionId)
+      const activeSubSectionId =
+        courseSectionData[currentSectionIndx]?.subSection?.[
+          currentSubSectionIndx
+        ]?._id
+      setActiveStatus(courseSectionData?.[currentSectionIndx]?._id)
+      setVideoBarActive(activeSubSectionId)
+    })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseSectionData, courseEntireData, location.pathname])
 
   return (
     <>
@@ -81,6 +80,9 @@ function VideoDetailsSidebar({setReviewModal}) {
                   {course?.sectionName}
                 </div>
                 <div className="flex items-center gap-3">
+                  {/* <span className="text-[12px] font-medium">
+                    Lession {course?.subSection.length}
+                  </span> */}
                   <span
                     className={`${
                       activeStatus === course?.sectionName
@@ -128,5 +130,3 @@ function VideoDetailsSidebar({setReviewModal}) {
     </>
   )
 }
-
-export default VideoDetailsSidebar
