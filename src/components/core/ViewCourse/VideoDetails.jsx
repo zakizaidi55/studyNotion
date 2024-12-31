@@ -149,7 +149,7 @@ function VideoDetails() {
 
 
   return (
-    <div className="flex flex-col gap-5 text-white">
+    <div className="flex flex-col gap-5 text-white ">
       {!videoData ? (
        <div>
         No video Found
@@ -161,6 +161,7 @@ function VideoDetails() {
           playsInline
           onEnded={() => setVideoEnded(true)}
           src={videoData?.videoUrl}
+          className="w-[100%]"
         >
           <BigPlayButton position="center" />
           {/* Render When Video Ends */}
