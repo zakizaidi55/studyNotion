@@ -25,7 +25,8 @@ const VideoDetails = () => {
 
   useEffect(() => {
     ;(async () => {
-      if (!courseSectionData.length) return
+      if (!courseSectionData.length) 
+        return
       if (!courseId && !sectionId && !subSectionId) {
         navigate(`/dashboard/enrolled-courses`)
       } else {
@@ -155,6 +156,7 @@ const VideoDetails = () => {
   }
 
   const handleLectureCompletion = async () => {
+    console.log("updating course lecture");
     setLoading(true)
     const res = await markLectureAsComplete(
       { courseId: courseId, subsectionId: subSectionId },

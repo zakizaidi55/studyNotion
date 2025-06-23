@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {fetchCourseDetails} from "../services/operations/courseDetailsAPI"
 import toast from 'react-hot-toast';
 import GetAvgRating from "../utils/avgRating"
-import Error from "../pages/Error"
 import ConfirmationModal from "../components/common/ConfirmationModal";
 import { HiOutlineGlobeAlt } from 'react-icons/hi';
 import RatingStars from "../components/common/RatingStars"
@@ -50,57 +49,33 @@ function CourseDetails() {
         const count = GetAvgRating(courseData?.data?.courseDetails?.ratingAndReviews);
         setAverageReviewCount(count);
     },[])
-
-
-    // lecture count
-    const [totalNoOfLecture, setTotalNoOfLecture] = useState(0);
-    // useEffect(()=> {
-    //     let lectures = 0;
-    //     // todo remove :- uncomment the code
-    //     courseData?.data?.courseDetails?.courseContent?.forEach((sec) => {
-    //         lectures += sec?.subsection.length || 0
-    //     })
-
-    //     setTotalNoOfLecture(lectures);
-    // },[courseData])    
-
+    const [totalNoOfLecture, setTotalNoOfLecture] = useState(0);   
     const [isActive, setIsActive] = useState([]);
     const handleActive =(id) => {
       setIsActive(!isActive.includes(id) ? isActive.concat(id) : isActive.filter((e) => e != id));
     }
 
     if(loading || !courseData) {
-        return (
-            <div>
-                Loading......
-            </div>
-        )
+      return (
+        <div>
+            Loading......
+        </div>
+      )
     }
-
-    // if(!courseData?.success) {
-    //     return (
-    //         <div>
-    //             <Error/>
-    //         </div>
-    //     )
-    // }
-
     const handleBuyCourse =() => {
-        if(token) {
-            buyCourse(token, [courseId], user, navigate, dispatch);
-            return;
-        }
-
+      if(token) {
+        buyCourse(token, [courseId], user, navigate, dispatch);
+        return;
+      }
         // it means, a logout person try to buy a course
-
-        setConfirmationModal({
-            text1:"You are not Logged in",
-            text2:"Please Login to purchase the course",
-            btn1Text:"Login",
-            btn2Text:"Cancel",
-            btn1Handler:(() => navigate("/login")),
-            btn2Handler:(()=> setConfirmationModal(false)),
-        })
+      setConfirmationModal({
+        text1:"You are not Logged in",
+        text2:"Please Login to purchase the course",
+        btn1Text:"Login",
+        btn2Text:"Cancel",
+        btn1Handler:(() => navigate("/login")),
+        btn2Handler:(()=> setConfirmationModal(false)),
+      })
 
     }
 

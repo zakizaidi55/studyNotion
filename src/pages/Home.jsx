@@ -122,7 +122,6 @@ function Home() {
       {/*Section 2  */}
       <div className='bg-pure-greys-5 text-richblack-700'>
             <div className='homepage_bg h-[310px]'>
-
                 <div className='w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-5 mx-auto'>
                     <div className='h-[150px]'></div>
                     <div className='flex flex-row gap-7 text-white '>
@@ -139,10 +138,7 @@ function Home() {
                             </div>
                         </CTAButton>
                     </div>
-
                 </div>
-
-
             </div>
 
             <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
@@ -173,7 +169,6 @@ function Home() {
                 <LearningLanguageSection />
 
             </div>  
-
       </div>
 
 
