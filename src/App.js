@@ -142,9 +142,7 @@ function App() {
                   <Route path="view-course/:courseId/section/:sectionId/sub-Section/:subSectionId" element ={<VideoDetails/>}/>
                 </>
               )
-              
             }
-
           </Route>
       </Routes>
 
